@@ -8,18 +8,59 @@
 
 /* Begin PBXFileReference section */
 		8A09C5C72FB49C1200CD4BCF /* RadioPure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadioPure.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A09C5E02FB49C1200CD4BCF /* RadioPureIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadioPureIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8A09C5EA2FB49C1200CD4BCF /* Exceptions for "RadioPureIOS" folder in "RadioPureIOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8A09C5E22FB49C1200CD4BCF /* RadioPureIOS */;
+		};
+		8A09C5EB2FB49C1200CD4BCF /* Exceptions for "RadioPure" folder in "RadioPure" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8A09C5C62FB49C1200CD4BCF /* RadioPure */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8A09C5C92FB49C1200CD4BCF /* RadioPure */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8A09C5EB2FB49C1200CD4BCF /* Exceptions for "RadioPure" folder in "RadioPure" target */,
+			);
 			path = RadioPure;
+			sourceTree = "<group>";
+		};
+		8A09C5E12FB49C1200CD4BCF /* RadioPureIOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8A09C5EA2FB49C1200CD4BCF /* Exceptions for "RadioPureIOS" folder in "RadioPureIOS" target */,
+			);
+			path = RadioPureIOS;
+			sourceTree = "<group>";
+		};
+		8A09C5E82FB49C1200CD4BCF /* RadioPureShared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RadioPureShared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8A09C5C42FB49C1200CD4BCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A09C5E42FB49C1200CD4BCF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				8A09C5C92FB49C1200CD4BCF /* RadioPure */,
+				8A09C5E12FB49C1200CD4BCF /* RadioPureIOS */,
+				8A09C5E82FB49C1200CD4BCF /* RadioPureShared */,
 				8A09C5C82FB49C1200CD4BCF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				8A09C5C72FB49C1200CD4BCF /* RadioPure.app */,
+				8A09C5E02FB49C1200CD4BCF /* RadioPureIOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,12 +106,36 @@
 			);
 			fileSystemSynchronizedGroups = (
 				8A09C5C92FB49C1200CD4BCF /* RadioPure */,
+				8A09C5E82FB49C1200CD4BCF /* RadioPureShared */,
 			);
 			name = RadioPure;
 			packageProductDependencies = (
 			);
 			productName = RadioPure;
 			productReference = 8A09C5C72FB49C1200CD4BCF /* RadioPure.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8A09C5E22FB49C1200CD4BCF /* RadioPureIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A09C5D72FB49C1400CD4BCF /* Build configuration list for PBXNativeTarget "RadioPureIOS" */;
+			buildPhases = (
+				8A09C5E32FB49C1200CD4BCF /* Sources */,
+				8A09C5E42FB49C1200CD4BCF /* Frameworks */,
+				8A09C5E52FB49C1200CD4BCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8A09C5E12FB49C1200CD4BCF /* RadioPureIOS */,
+				8A09C5E82FB49C1200CD4BCF /* RadioPureShared */,
+			);
+			name = RadioPureIOS;
+			packageProductDependencies = (
+			);
+			productName = RadioPureIOS;
+			productReference = 8A09C5E02FB49C1200CD4BCF /* RadioPureIOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -81,6 +149,9 @@
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					8A09C5C62FB49C1200CD4BCF = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					8A09C5E22FB49C1200CD4BCF = {
 						CreatedOnToolsVersion = 26.5;
 					};
 				};
@@ -100,6 +171,7 @@
 			projectRoot = "";
 			targets = (
 				8A09C5C62FB49C1200CD4BCF /* RadioPure */,
+				8A09C5E22FB49C1200CD4BCF /* RadioPureIOS */,
 			);
 		};
 /* End PBXProject section */
@@ -112,10 +184,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A09C5E52FB49C1200CD4BCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A09C5C32FB49C1200CD4BCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A09C5E32FB49C1200CD4BCF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,13 +334,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RadioPure/RadioPure.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RadioPure/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -278,13 +366,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RadioPure/RadioPure.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RadioPure/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +390,75 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		8A09C5D52FB49C1400CD4BCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P4QB87LWU3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RadioPureIOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radiopure.app.RadioPureIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A09C5D62FB49C1400CD4BCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P4QB87LWU3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RadioPureIOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radiopure.app.RadioPureIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -320,6 +479,15 @@
 			buildConfigurations = (
 				8A09C5D32FB49C1400CD4BCF /* Debug */,
 				8A09C5D42FB49C1400CD4BCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A09C5D72FB49C1400CD4BCF /* Build configuration list for PBXNativeTarget "RadioPureIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A09C5D52FB49C1400CD4BCF /* Debug */,
+				8A09C5D62FB49C1400CD4BCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.RadioPure" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@color/radio_pure_background</item>
+        <item name="android:navigationBarColor">@color/radio_pure_background</item>
+        <item name="android:windowBackground">@color/radio_pure_background</item>
+    </style>
+</resources>

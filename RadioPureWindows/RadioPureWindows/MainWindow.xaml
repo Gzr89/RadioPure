@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="RadioPureWindows.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RadioPureWindows.Controls"
+    xmlns:models="using:RadioPureWindows.Models">
+
+    <Grid Background="#141419">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Padding="20,24" Spacing="6">
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="13"
+                FontWeight="SemiBold"
+                Foreground="#66FFFFFF"
+                CharacterSpacing="300"
+                Text="RadioPure" />
+
+            <StackPanel
+                x:Name="CurrentStationPanel"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="6"
+                Visibility="Collapsed">
+                <Ellipse
+                    x:Name="StatusDot"
+                    Width="6"
+                    Height="6"
+                    Fill="#FF00C800" />
+                <TextBlock
+                    x:Name="CurrentStationName"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Foreground="White" />
+            </StackPanel>
+
+            <TextBlock
+                x:Name="PlaceholderText"
+                HorizontalAlignment="Center"
+                FontSize="18"
+                FontWeight="Medium"
+                Foreground="#80FFFFFF"
+                Text="选择一个电台开始收听" />
+        </StackPanel>
+
+        <Rectangle Grid.Row="1" Height="1" Fill="#1AFFFFFF" />
+
+        <!-- Station list -->
+        <ListView
+            x:Name="StationList"
+            Grid.Row="2"
+            Padding="0"
+            SelectionMode="None"
+            ContainerContentChanging="StationList_ContainerContentChanging">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="MinHeight" Value="0" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:RadioStation">
+                    <controls:StationRow
+                        Tapped="StationRow_Tapped"
+                        Station="{x:Bind}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Rectangle Grid.Row="3" Height="1" Fill="#1AFFFFFF" />
+
+        <!-- Controls -->
+        <StackPanel Grid.Row="4" Padding="0,20" Spacing="16">
+            <Button
+                x:Name="PlayPauseButton"
+                HorizontalAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                IsEnabled="False"
+                Click="PlayPauseButton_Click">
+                <Grid Width="52" Height="52">
+                    <Ellipse x:Name="PlayButtonCircle" Fill="#33FFFFFF" />
+                    <FontIcon
+                        x:Name="PlayPauseIcon"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Foreground="#66FFFFFF"
+                        Glyph="&#xE768;" />
+                </Grid>
+            </Button>
+
+            <Grid Margin="32,0" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="18" />
+                </Grid.ColumnDefinitions>
+
+                <FontIcon
+                    FontSize="12"
+                    Foreground="#66FFFFFF"
+                    Glyph="&#xE74F;" />
+                <Slider
+                    x:Name="VolumeSlider"
+                    Grid.Column="1"
+                    Maximum="1"
+                    Minimum="0"
+                    StepFrequency="0.01"
+                    Value="0.7"
+                    ValueChanged="VolumeSlider_ValueChanged" />
+                <FontIcon
+                    Grid.Column="2"
+                    FontSize="12"
+                    Foreground="#66FFFFFF"
+                    Glyph="&#xE9CA;" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

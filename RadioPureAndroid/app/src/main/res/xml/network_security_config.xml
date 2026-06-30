@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 与 iOS NSAllowsArbitraryLoads 对齐：允许 HTTP 卫星链路等明文流 -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

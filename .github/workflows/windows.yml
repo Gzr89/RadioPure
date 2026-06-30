@@ -1,0 +1,69 @@
+name: Windows
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'RadioPureWindows/**'
+      - '.github/workflows/windows.yml'
+  pull_request:
+    paths:
+      - 'RadioPureWindows/**'
+      - '.github/workflows/windows.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: 还原依赖
+        run: dotnet restore RadioPureWindows/RadioPureWindows.sln
+
+      - name: 编译（Release x64）
+        run: dotnet build RadioPureWindows/RadioPureWindows.sln -c Release -p:Platform=x64 --no-restore
+
+      - name: 生成 CI 签名证书
+        shell: pwsh
+        run: |
+          $password = ConvertTo-SecureString -String "radiopure-ci" -Force -AsPlainText
+          $cert = New-SelfSignedCertificate `
+            -Type Custom `
+            -Subject "CN=RadioPure Dev" `
+            -KeyUsage DigitalSignature `
+            -FriendlyName "RadioPure CI" `
+            -CertStoreLocation "Cert:\CurrentUser\My" `
+            -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.3", "2.5.29.19={text}")
+          Export-PfxCertificate `
+            -Cert "Cert:\CurrentUser\My\$($cert.Thumbprint)" `
+            -FilePath RadioPureWindows/RadioPureWindows/RadioPureWindows_CI.pfx `
+            -Password $password | Out-Null
+          Write-Host "Certificate thumbprint: $($cert.Thumbprint)"
+
+      - name: 打包 MSIX（Release x64）
+        run: >
+          dotnet publish RadioPureWindows/RadioPureWindows/RadioPureWindows.csproj
+          -c Release
+          -p:Platform=x64
+          -p:PublishProfile=win-x64-msix
+          -p:GenerateTemporaryStoreCertificate=false
+          -p:PackageCertificateKeyFile=RadioPureWindows_CI.pfx
+          -p:PackageCertificatePassword=radiopure-ci
+          -p:AppxPackageSigningEnabled=true
+
+      - name: 上传 MSIX 产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: RadioPureWindows-msix-x64
+          path: |
+            RadioPureWindows/RadioPureWindows/bin/Release/**/*.msix
+            RadioPureWindows/RadioPureWindows/bin/Release/**/*.msixbundle
+          if-no-files-found: warn

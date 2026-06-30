@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- 启用 App 沙盒 -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <!-- 允许发起出站网络连接，用于播放网络音频流 -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <!-- 允许系统在播放时访问音频分析服务的 Mach 端口，减少沙盒 PRECONDITION 告警 -->
+    <key>com.apple.security.exception.mach-lookup.global-name</key>
+    <array>
+        <string>com.apple.audioanalyticsd</string>
+    </array>
+</dict>
+</plist>
