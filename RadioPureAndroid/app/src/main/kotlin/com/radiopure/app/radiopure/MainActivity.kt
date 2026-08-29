@@ -1,12 +1,10 @@
 package com.radiopure.app.radiopure
 
 import android.Manifest
-import android.content.Intent
+import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +13,9 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
+import androidx.media3.session.MediaController
+import androidx.media3.session.SessionToken
+import com.google.common.util.concurrent.ListenableFuture
 import com.radiopure.app.radiopure.service.PlaybackService
 import com.radiopure.app.radiopure.ui.ContentScreen
 import com.radiopure.app.radiopure.ui.MainViewModel
@@ -23,8 +24,7 @@ import com.radiopure.app.radiopure.ui.theme.RadioPureTheme
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
-    private val mainHandler = Handler(Looper.getMainLooper())
-    private var attachAttempts = 0
+    private var controllerFuture: ListenableFuture<MediaController>? = null
 
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
@@ -46,31 +46,27 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        val intent = Intent(this, PlaybackService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-        } else {
-            startService(intent)
-        }
-        attachAttempts = 0
-        scheduleAttachPlayer()
+        val sessionToken = SessionToken(
+            this,
+            ComponentName(this, PlaybackService::class.java),
+        )
+        val future = MediaController.Builder(this, sessionToken).buildAsync()
+        controllerFuture = future
+        future.addListener(
+            {
+                if (controllerFuture !== future) return@addListener
+                runCatching { future.get() }
+                PlaybackService.instance?.radioPlayer?.let(viewModel::attachRadioPlayer)
+            },
+            ContextCompat.getMainExecutor(this),
+        )
     }
 
     override fun onStop() {
-        mainHandler.removeCallbacksAndMessages(null)
         viewModel.detachRadioPlayer()
+        controllerFuture?.let { MediaController.releaseFuture(it) }
+        controllerFuture = null
         super.onStop()
-    }
-
-    private fun scheduleAttachPlayer() {
-        val player = PlaybackService.instance?.radioPlayer
-        if (player != null) {
-            viewModel.attachRadioPlayer(player)
-            return
-        }
-        if (attachAttempts++ < 40) {
-            mainHandler.postDelayed({ scheduleAttachPlayer() }, 50)
-        }
     }
 
     private fun requestNotificationPermissionIfNeeded() {
